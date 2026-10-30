@@ -1,0 +1,21 @@
+/* 计划页占位样式：整页居中 */
+.empty-plan {
+  padding-top: 240rpx;
+  text-align: center;
+}
+
+.empty-emoji {
+  font-size: 120rpx;
+}
+
+.empty-title {
+  margin-top: var(--space-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.empty-desc {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}

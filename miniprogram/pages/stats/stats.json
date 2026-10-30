@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "month-calendar": "/components/month-calendar/index",
+    "body-editor": "/components/body-editor/index",
+    "record-detail": "/components/record-detail/index"
+  },
+  "navigationBarTitleText": "数据"
+}

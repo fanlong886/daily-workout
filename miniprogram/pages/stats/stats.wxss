@@ -1,0 +1,183 @@
+/* 数据页样式：摘要四宫格 + 月历/体重/记录区块 */
+.summary-card {
+  display: flex;
+  margin-bottom: var(--space-lg);
+}
+
+.summary-item {
+  flex: 1;
+  text-align: center;
+}
+
+.summary-num {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.summary-label {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* 区块通用间距：月历组件自带卡片，这里补外距 */
+month-calendar {
+  display: block;
+  margin-bottom: var(--space-lg);
+}
+
+/* 体重区块 */
+.weight-card {
+  margin-bottom: var(--space-lg);
+}
+
+.weight-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.block-title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.weight-add {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: var(--font-size-xs);
+  padding: 6rpx var(--space-sm);
+  border-radius: var(--radius-pill);
+}
+
+.weight-latest {
+  margin-top: var(--space-sm);
+}
+
+.weight-num {
+  font-size: 64rpx;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.weight-unit {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-left: var(--space-xs);
+}
+
+.weight-diff {
+  margin-left: var(--space-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-success);
+}
+
+/* 最新体脂值 */
+.weight-fat {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: var(--color-success);
+  margin-left: var(--space-md);
+}
+
+/* 图例：橙=体重，绿=体脂率 */
+.chart-legend {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.legend-item {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 20rpx;
+  height: 6rpx;
+  border-radius: 6rpx;
+  margin-right: 6rpx;
+}
+
+.legend-dot-weight {
+  background: var(--color-primary);
+}
+
+.legend-dot-fat {
+  background: var(--color-success);
+}
+
+.weight-date {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-top: 4rpx;
+}
+
+.weight-canvas {
+  width: 100%;
+  height: 240rpx;
+  margin-top: var(--space-sm);
+}
+
+.weight-empty {
+  margin-top: var(--space-md);
+  padding: var(--space-lg) 0;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+/* 记录列表 */
+.records-title {
+  margin-bottom: var(--space-md);
+}
+
+.record-item {
+  display: flex;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.record-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.record-name {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.record-meta {
+  margin-top: 4rpx;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.record-note {
+  margin-top: 4rpx;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.record-arrow {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-lg);
+  margin-left: var(--space-sm);
+}
+
+.list-end {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  padding: var(--space-md) 0;
+}

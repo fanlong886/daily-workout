@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "checkin-editor": "/components/checkin-editor/index",
+    "checkin-success": "/components/checkin-success/index"
+  },
+  "navigationBarTitleText": "今天练了吗"
+}

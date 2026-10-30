@@ -1,0 +1,50 @@
+<!-- 今日页：打卡台。状态卡为真实数据（checkin.todayStatus），推荐卡仍为占位 -->
+<view class="page">
+  <!-- 今日打卡状态卡：连续天数大数字是首页唯一视觉重心 -->
+  <view class="card status-card">
+    <block wx:if="{{loading}}">
+      <view class="status-loading">加载中…</view>
+    </block>
+    <block wx:else>
+      <view class="status-greeting">{{checkedToday ? '今天已经练过了 💪' : '今天练了吗？'}}</view>
+      <view class="status-streak">
+        <text class="streak-num">{{streakDays}}</text>
+        <text class="streak-unit">天</text>
+      </view>
+      <view class="status-sub">{{checkedToday ? '保持住，明天见！' : '连续坚持 ' + streakDays + ' 天，别断了'}}</view>
+    </block>
+  </view>
+
+  <!-- 快速打卡大按钮：3 步打卡的入口 -->
+  <button class="btn-primary checkin-btn" bindtap="onQuickCheckin">+ 快速打卡</button>
+
+  <!-- 今日推荐训练卡（占位：跟练为 P1） -->
+  <view class="card recommend-card" bindtap="onRecommendTap">
+    <view class="recommend-tag">今日推荐</view>
+    <view class="recommend-title">{{recommend.title}}</view>
+    <view class="recommend-desc">{{recommend.desc}} · {{recommend.duration}} 分钟</view>
+  </view>
+
+  <!-- 本周概览：stats.summary.week_count -->
+  <view class="card week-card">
+    <text class="week-title">本周已练</text>
+    <text class="week-count">{{weekCount}}</text>
+    <text class="week-unit">次</text>
+    <text class="week-sub">{{weekCount >= 3 ? '节奏很好，保持！' : '一周 3 次是个好开始'}}</text>
+  </view>
+</view>
+
+<!-- 打卡编辑弹层 -->
+<checkin-editor
+  visible="{{showEditor}}"
+  bindcreated="onCheckinCreated"
+  bindclose="onEditorClose"
+/>
+
+<!-- 打卡成功弹层 -->
+<checkin-success
+  visible="{{successInfo !== null}}"
+  streak="{{successInfo ? successInfo.streak : 0}}"
+  date="{{successInfo ? successInfo.date : ''}}"
+  bindclose="onSuccessClose"
+/>

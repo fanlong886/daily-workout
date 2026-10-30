@@ -1,0 +1,52 @@
+/* 通用原子类：页面容器 / 卡片 / 主按钮 / 占位块 */
+page {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+}
+
+/* 页面容器：统一留白 + 底部安全区 */
+.page {
+  padding: var(--space-lg);
+  padding-bottom: calc(var(--space-xl) + env(safe-area-inset-bottom));
+}
+
+/* 卡片 */
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+/* 主按钮（实心炽橙，胶囊形） */
+.btn-primary {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: 2.6;
+}
+.btn-primary::after {
+  border: none;
+}
+.btn-primary:active {
+  background: var(--color-primary-deep);
+}
+
+/* 空态 / 占位块（骨架批次统一视觉） */
+.placeholder-box {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-sm);
+}
+
+/* 通用分割线 */
+.divider {
+  height: 1rpx;
+  background: var(--color-line);
+}

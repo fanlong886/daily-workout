@@ -1,0 +1,8 @@
+{"name":"自选训练","icon":"✅","default_duration_min":20,"sort":0,"enabled":true}
+{"name":"快走/跑步","icon":"🏃","default_duration_min":30,"sort":1,"enabled":true}
+{"name":"跳绳","icon":"🪢","default_duration_min":15,"sort":2,"enabled":true}
+{"name":"HIIT 燃脂","icon":"🔥","default_duration_min":15,"sort":3,"enabled":true}
+{"name":"力量训练","icon":"💪","default_duration_min":30,"sort":4,"enabled":true}
+{"name":"瑜伽/拉伸","icon":"🧘","default_duration_min":20,"sort":5,"enabled":true}
+{"name":"游泳","icon":"🏊","default_duration_min":30,"sort":6,"enabled":true}
+{"name":"骑行","icon":"🚴","default_duration_min":30,"sort":7,"enabled":true}

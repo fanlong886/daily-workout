@@ -1,0 +1,65 @@
+<!-- 记录详情弹层：查看态 / 编辑态 -->
+<view class="mask" wx:if="{{visible && record}}" bindtap="onClose">
+  <view class="panel" catchtap="noop">
+    <view class="panel-header">
+      <text class="panel-title">{{dateLabel}}</text>
+      <text class="panel-close" bindtap="onClose">✕</text>
+    </view>
+
+    <!-- 查看态 -->
+    <block wx:if="{{!editing}}">
+      <view class="detail-row">
+        <text class="detail-label">训练</text>
+        <text class="detail-value">{{record.type_name}}</text>
+      </view>
+      <view class="detail-row">
+        <text class="detail-label">时长</text>
+        <text class="detail-value">{{record.duration_min}} 分钟</text>
+      </view>
+      <view class="detail-row">
+        <text class="detail-label">强度</text>
+        <text class="detail-value">{{record.intensity}}</text>
+      </view>
+      <view class="detail-row" wx:if="{{record.note}}">
+        <text class="detail-label">备注</text>
+        <text class="detail-value">{{record.note}}</text>
+      </view>
+
+      <view class="action-row">
+        <button class="action-btn action-delete" bindtap="onDelete" disabled="{{deleting}}">删除</button>
+        <button class="action-btn action-edit" bindtap="onEdit">编辑</button>
+      </view>
+    </block>
+
+    <!-- 编辑态：时长 / 强度 / 备注 -->
+    <block wx:else>
+      <view class="section-label">练了多久？</view>
+      <view class="duration-row">
+        <view class="step-btn" bindtap="onDurationMinus">−</view>
+        <view class="duration-value">{{duration}}<text class="duration-unit">分钟</text></view>
+        <view class="step-btn" bindtap="onDurationPlus">＋</view>
+      </view>
+
+      <view class="section-label">强度感受</view>
+      <view class="intensity-row">
+        <view
+          wx:for="{{intensities}}"
+          wx:key="*this"
+          class="intensity-item {{intensity === item ? 'intensity-active' : ''}}"
+          data-value="{{item}}"
+          bindtap="onSelectIntensity"
+        >{{item}}</view>
+      </view>
+
+      <view class="section-label">备注</view>
+      <input class="note-input" maxlength="200" value="{{note}}" bindinput="onNoteInput" />
+
+      <view class="action-row">
+        <button class="action-btn action-delete" bindtap="onCancelEdit">取消</button>
+        <button class="action-btn action-edit {{submitting ? 'btn-disabled' : ''}}" bindtap="onSave" disabled="{{submitting}}">
+          {{submitting ? '保存中…' : '保存'}}
+        </button>
+      </view>
+    </block>
+  </view>
+</view>

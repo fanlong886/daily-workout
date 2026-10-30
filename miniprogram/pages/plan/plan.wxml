@@ -1,0 +1,8 @@
+<!-- 计划页：P0 仅静态占位（蓝图 §9.6），计划功能为 P1 -->
+<view class="page">
+  <view class="empty-plan">
+    <text class="empty-emoji">📅</text>
+    <view class="empty-title">计划功能即将上线</view>
+    <view class="empty-desc">7 天入门 · 21 天减脂计划正在路上</view>
+  </view>
+</view>

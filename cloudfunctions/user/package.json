@@ -1,0 +1,9 @@
+{
+  "name": "user",
+  "version": "1.0.0",
+  "description": "user.get / user.update（蓝图 §9.2）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

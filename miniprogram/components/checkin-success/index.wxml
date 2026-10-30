@@ -1,0 +1,17 @@
+<!-- 打卡成功弹层：庆祝 + 连续天数 + 每日提醒引导占位 -->
+<view class="mask" wx:if="{{visible}}" bindtap="onDone">
+  <view class="dialog" catchtap="noop">
+    <text class="celebrate">🎉</text>
+    <view class="done-title">今天已打卡！</view>
+    <view class="done-streak">
+      <text class="streak-num">{{streak}}</text>
+      <text class="streak-unit">天</text>
+    </view>
+    <view class="done-sub">已连续坚持 {{streak}} 天，明天见</view>
+
+    <!-- 每日提醒引导：P1 接订阅消息，本批占位 -->
+    <view class="remind-placeholder">开启每日提醒，不断更（即将上线）</view>
+
+    <button class="btn-primary done-btn" bindtap="onDone">好的</button>
+  </view>
+</view>

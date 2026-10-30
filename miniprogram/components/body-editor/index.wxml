@@ -1,0 +1,41 @@
+<!-- 体重录入弹层：体重必填 + 体脂可选 -->
+<view class="mask" wx:if="{{visible}}" bindtap="onClose">
+  <view class="panel" catchtap="noop">
+    <view class="panel-header">
+      <text class="panel-title">记录体重</text>
+      <text class="panel-close" bindtap="onClose">✕</text>
+    </view>
+
+    <view class="field-label">记录日期</view>
+    <picker mode="date" value="{{selectedDate}}" start="{{minDate}}" end="{{today}}" bindchange="onDateChange">
+      <view class="date-picker">
+        <text>{{dateLabel}}</text>
+        <text class="date-arrow">›</text>
+      </view>
+    </picker>
+
+    <view class="field-label">体重（千克）</view>
+    <input
+      class="field-input"
+      type="digit"
+      placeholder="如 65.5"
+      value="{{weight}}"
+      bindinput="onWeightInput"
+    />
+
+    <view class="field-label">体脂率（%，选填）</view>
+    <input
+      class="field-input"
+      type="digit"
+      placeholder="如 22（不知道可跳过）"
+      value="{{bodyFat}}"
+      bindinput="onBodyFatInput"
+    />
+
+    <view class="field-tip">选过去的日期可以补录，趋势按每天最后一次记录计算</view>
+
+    <button class="btn-primary confirm-btn {{submitting ? 'btn-disabled' : ''}}" bindtap="onConfirm" disabled="{{submitting}}">
+      {{submitting ? '保存中…' : '保存'}}
+    </button>
+  </view>
+</view>

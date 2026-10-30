@@ -1,0 +1,51 @@
+/* 编辑资料页样式 */
+.form-card {
+  margin-bottom: var(--space-lg);
+}
+
+.field-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: var(--space-md) 0 var(--space-xs);
+}
+
+.field-label:first-child {
+  margin-top: 0;
+}
+
+.field-input {
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-md);
+}
+
+.option-row {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.option-item {
+  flex: 1;
+  text-align: center;
+  padding: var(--space-sm) 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  font-size: var(--font-size-sm);
+  border: 2rpx solid transparent;
+}
+
+.option-active {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.save-btn {
+  margin-top: var(--space-md);
+}
+
+.btn-disabled {
+  opacity: 0.6;
+}

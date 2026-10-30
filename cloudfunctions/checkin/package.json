@@ -1,0 +1,9 @@
+{
+  "name": "checkin",
+  "version": "1.0.0",
+  "description": "checkin.types / checkin.create / checkin.todayStatus（蓝图 §9.3）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

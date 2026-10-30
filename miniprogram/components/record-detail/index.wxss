@@ -1,0 +1,161 @@
+/* 记录详情弹层：查看 + 编辑双态 */
+.mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(36, 40, 51, 0.55);
+  z-index: 100;
+}
+
+.panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-card);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--space-lg) var(--space-lg) calc(var(--space-xl) + env(safe-area-inset-bottom));
+  animation: slide-up 0.22s ease-out;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.panel-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.panel-close {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-lg);
+  padding: 0 var(--space-xs);
+}
+
+/* 查看态行 */
+.detail-row {
+  display: flex;
+  padding: var(--space-sm) 0;
+  font-size: var(--font-size-md);
+}
+
+.detail-label {
+  width: 120rpx;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 2;
+}
+
+.detail-value {
+  flex: 1;
+  color: var(--color-text);
+}
+
+/* 操作按钮：删除（红） + 编辑（主色） */
+.action-row {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.action-btn {
+  flex: 1;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-md);
+  line-height: 2.4;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.action-delete {
+  background: #FDECEC;
+  color: var(--color-danger, #FA5151);
+}
+
+.action-edit {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.btn-disabled {
+  opacity: 0.6;
+}
+
+/* 编辑态控件（与打卡弹层同风格） */
+.section-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: var(--space-md) 0 var(--space-sm);
+}
+
+.duration-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  padding: var(--space-xs) 0;
+}
+
+.step-btn {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: var(--color-bg);
+  font-size: var(--font-size-xl);
+  text-align: center;
+  line-height: 68rpx;
+}
+
+.duration-value {
+  font-size: 56rpx;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.duration-unit {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  margin-left: var(--space-xs);
+}
+
+.intensity-row {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.intensity-item {
+  flex: 1;
+  text-align: center;
+  padding: var(--space-sm) 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  font-size: var(--font-size-sm);
+  border: 2rpx solid transparent;
+}
+
+.intensity-active {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.note-input {
+  margin-top: var(--space-xs);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-sm);
+}

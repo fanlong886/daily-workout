@@ -1,0 +1,71 @@
+/* 月历点亮组件样式 */
+.calendar {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+.cal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-md);
+}
+
+.cal-month {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.cal-count {
+  font-size: var(--font-size-xs);
+  color: var(--color-success);
+}
+
+.cal-weekdays {
+  display: flex;
+  margin-bottom: var(--space-xs);
+}
+
+.cal-weekday {
+  flex: 1;
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.cal-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cal-cell {
+  width: calc(100% / 7);
+  display: flex;
+  justify-content: center;
+  padding: 6rpx 0;
+}
+
+.cal-day {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  border: 2rpx solid transparent;
+}
+
+/* 打卡日：绿点亮 */
+.cal-day-checked {
+  background: var(--color-success);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+/* 今天描边（即使未打卡也标识位置） */
+.cal-day-today {
+  border-color: var(--color-primary);
+}

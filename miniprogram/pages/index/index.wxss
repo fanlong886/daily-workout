@@ -1,0 +1,100 @@
+/* 今日页样式：状态卡为全页视觉重心，其余保持安静 */
+.status-card {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.status-loading {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-sm);
+  padding: var(--space-lg) 0;
+}
+
+.status-greeting {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+/* 连续天数：超大炽橙数字 */
+.status-streak {
+  margin: var(--space-sm) 0;
+  color: var(--color-primary);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.streak-num {
+  font-size: 112rpx;
+}
+
+.streak-unit {
+  font-size: var(--font-size-lg);
+  margin-left: var(--space-xs);
+}
+
+.status-sub {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* 快速打卡大按钮 */
+.checkin-btn {
+  margin: var(--space-lg) 0;
+  width: 100%;
+}
+
+/* 今日推荐卡 */
+.recommend-card {
+  margin-bottom: var(--space-lg);
+}
+
+.recommend-tag {
+  display: inline-block;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: var(--font-size-xs);
+  padding: 4rpx var(--space-sm);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-sm);
+}
+
+.recommend-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.recommend-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+}
+
+/* 本周概览条 */
+.week-card {
+  display: flex;
+  align-items: baseline;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.week-title {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.week-count {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 var(--space-xs);
+}
+
+.week-unit {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.week-sub {
+  margin-left: auto;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}

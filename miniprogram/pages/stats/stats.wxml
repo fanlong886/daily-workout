@@ -1,0 +1,96 @@
+<!-- 数据页：摘要卡（真实）+ 月历点亮 + 体重趋势 + 历史记录列表 -->
+<view class="page">
+  <!-- 统计摘要卡 -->
+  <view class="card summary-card">
+    <view class="summary-item">
+      <view class="summary-num">{{summary.totalDays}}</view>
+      <view class="summary-label">累计打卡</view>
+    </view>
+    <view class="summary-item">
+      <view class="summary-num">{{summary.streakDays}}</view>
+      <view class="summary-label">连续天数</view>
+    </view>
+    <view class="summary-item">
+      <view class="summary-num">{{summary.monthDays}}</view>
+      <view class="summary-label">本月打卡</view>
+    </view>
+    <view class="summary-item">
+      <view class="summary-num">{{summary.totalHours}}</view>
+      <view class="summary-label">累计小时</view>
+    </view>
+  </view>
+
+  <!-- 月历点亮：当月只读 -->
+  <month-calendar month="{{month}}" checked="{{checkedDays}}" today="{{todayStr}}" />
+
+  <!-- 体重趋势 -->
+  <view class="card weight-card">
+    <view class="weight-header">
+      <text class="block-title">体重趋势</text>
+      <view class="weight-add" bindtap="onOpenBodyEditor">+ 记一笔</view>
+    </view>
+
+    <view wx:if="{{weightLatest}}" class="weight-latest">
+      <text class="weight-num">{{weightLatest.weight_kg}}</text>
+      <text class="weight-unit">kg</text>
+      <block wx:if="{{weightLatest.body_fat_pct}}">
+        <text class="weight-fat">{{weightLatest.body_fat_pct}}%</text>
+        <text class="weight-unit">体脂</text>
+      </block>
+      <text class="weight-diff" wx:if="{{weightDiff !== null && weightDiff !== 0}}">
+        {{weightDiff > 0 ? '+' : ''}}{{weightDiff}}kg（近30天）
+      </text>
+    </view>
+    <view wx:if="{{weightLatest}}" class="weight-date">记录于 {{weightLatest.date}}</view>
+
+    <view class="chart-legend" wx:if="{{weightRecords.length >= 2}}">
+      <text class="legend-item"><text class="legend-dot legend-dot-weight"></text>体重</text>
+      <text class="legend-item" wx:if="{{hasFatSeries}}"><text class="legend-dot legend-dot-fat"></text>体脂率</text>
+    </view>
+
+    <canvas
+      wx:if="{{weightRecords.length >= 2}}"
+      type="2d"
+      id="weightChart"
+      class="weight-canvas"
+    ></canvas>
+    <view wx:else class="weight-empty">
+      {{weightRecords.length === 0 ? '还没有体重记录，点上面「+ 记一笔」开始' : '再记一次就能看到趋势曲线'}}
+    </view>
+  </view>
+
+  <!-- 历史记录列表 -->
+  <view class="block-title records-title">训练记录</view>
+  <view
+    wx:for="{{records}}"
+    wx:key="_id"
+    class="card record-item"
+    data-id="{{item._id}}"
+    bindtap="onRecordTap"
+  >
+    <view class="record-main">
+      <view class="record-name">{{item.type_name}}</view>
+      <view class="record-meta">{{item.date}} · {{item.duration_min}} 分钟 · {{item.intensity}}强度</view>
+      <view class="record-note" wx:if="{{item.note}}">{{item.note}}</view>
+    </view>
+    <text class="record-arrow">›</text>
+  </view>
+
+  <view wx:if="{{!loadingRecords && records.length === 0}}" class="placeholder-box">
+    还没有打卡记录，去「今日」开始第一次打卡吧
+  </view>
+  <view wx:if="{{loadingRecords}}" class="placeholder-box">加载中…</view>
+  <view wx:if="{{!hasMore && records.length > 0}}" class="list-end">— 没有更多了 —</view>
+</view>
+
+<!-- 体重录入弹层 -->
+<body-editor visible="{{showBodyEditor}}" bindcreated="onBodyCreated" bindclose="onBodyEditorClose" />
+
+<!-- 记录详情弹层 -->
+<record-detail
+  record="{{activeRecord}}"
+  visible="{{activeRecord !== null}}"
+  bindupdated="onRecordUpdated"
+  binddeleted="onRecordDeleted"
+  bindclose="onRecordDetailClose"
+/>

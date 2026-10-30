@@ -1,0 +1,9 @@
+{
+  "name": "stats",
+  "version": "1.0.0",
+  "description": "stats.summary 统计摘要实时聚合（蓝图 §9.4）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

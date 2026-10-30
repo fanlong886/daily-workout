@@ -1,0 +1,20 @@
+<!-- 当月日历点亮：周一起始，打卡日绿点亮，今天描边（P0 只读） -->
+<view class="calendar">
+  <view class="cal-header">
+    <text class="cal-month">{{month}}</text>
+    <text class="cal-count">{{checkedCount}} 天点亮</text>
+  </view>
+
+  <view class="cal-weekdays">
+    <text class="cal-weekday" wx:for="{{weekdays}}" wx:key="*this">{{item}}</text>
+  </view>
+
+  <view class="cal-grid">
+    <view class="cal-cell" wx:for="{{cells}}" wx:key="index">
+      <view
+        wx:if="{{item}}"
+        class="cal-day {{item.checked ? 'cal-day-checked' : ''}} {{item.isToday ? 'cal-day-today' : ''}}"
+      >{{item.day}}</view>
+    </view>
+  </view>
+</view>

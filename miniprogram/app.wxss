@@ -1,0 +1,3 @@
+/* 全局样式入口：设计变量 + 通用原子类 */
+@import 'styles/variables.wxss';
+@import 'styles/common.wxss';

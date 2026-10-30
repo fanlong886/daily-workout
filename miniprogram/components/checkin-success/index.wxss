@@ -1,0 +1,75 @@
+/* 打卡成功弹层：居中对话框，弹入动画即庆祝感（唯一的动效时刻） */
+.mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(36, 40, 51, 0.55);
+  z-index: 101;
+}
+
+.dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+  animation: pop-in 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop-in {
+  from {
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.celebrate {
+  font-size: 96rpx;
+}
+
+.done-title {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.done-streak {
+  margin: var(--space-sm) 0;
+  color: var(--color-primary);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.streak-num {
+  font-size: 96rpx;
+}
+
+.streak-unit {
+  font-size: var(--font-size-md);
+  margin-left: var(--space-xs);
+}
+
+.done-sub {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.remind-placeholder {
+  margin: var(--space-md) 0;
+  padding: var(--space-sm) 0;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.done-btn {
+  margin-top: var(--space-sm);
+}

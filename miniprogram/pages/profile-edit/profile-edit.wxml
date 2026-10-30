@@ -1,0 +1,42 @@
+<!-- 编辑资料页：昵称 / 性别 / 身高 / 目标 -->
+<view class="page">
+  <block wx:if="{{loading}}">
+    <view class="placeholder-box">加载中…</view>
+  </block>
+
+  <block wx:else>
+    <view class="card form-card">
+      <view class="field-label">昵称</view>
+      <input class="field-input" maxlength="20" value="{{nickname}}" bindinput="onNicknameInput" />
+
+      <view class="field-label">性别</view>
+      <view class="option-row">
+        <view
+          wx:for="{{genders}}"
+          wx:key="value"
+          class="option-item {{gender === item.value ? 'option-active' : ''}}"
+          data-value="{{item.value}}"
+          bindtap="onSelectGender"
+        >{{item.label}}</view>
+      </view>
+
+      <view class="field-label">身高（厘米，选填）</view>
+      <input class="field-input" type="digit" placeholder="如 170" value="{{height}}" bindinput="onHeightInput" />
+
+      <view class="field-label">我的目标</view>
+      <view class="option-row">
+        <view
+          wx:for="{{goals}}"
+          wx:key="*this"
+          class="option-item {{goal === item ? 'option-active' : ''}}"
+          data-value="{{item}}"
+          bindtap="onSelectGoal"
+        >{{item}}</view>
+      </view>
+    </view>
+
+    <button class="btn-primary save-btn {{saving ? 'btn-disabled' : ''}}" bindtap="onSave" disabled="{{saving}}">
+      {{saving ? '保存中…' : '保存'}}
+    </button>
+  </block>
+</view>

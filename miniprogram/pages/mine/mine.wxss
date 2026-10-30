@@ -1,0 +1,67 @@
+/* 我的页样式：资料卡横排 + 菜单列表 */
+.profile-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+/* 头像占位：昵称首字圆形底 */
+.avatar {
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  text-align: center;
+  line-height: 112rpx;
+}
+
+.profile-info {
+  margin-left: var(--space-lg);
+}
+
+.nickname {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.goal-tag {
+  display: inline-block;
+  margin-top: var(--space-xs);
+  background: var(--color-success-soft);
+  color: var(--color-success);
+  font-size: var(--font-size-xs);
+  padding: 2rpx var(--space-sm);
+  border-radius: var(--radius-pill);
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) 0;
+}
+
+.menu-item:first-child {
+  padding-top: 0;
+}
+
+.menu-item:last-child {
+  padding-bottom: 0;
+}
+
+.menu-arrow {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-lg);
+}
+
+.menu-soon {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.menu-card .divider {
+  margin: 0;
+}

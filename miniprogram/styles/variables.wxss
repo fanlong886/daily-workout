@@ -1,0 +1,43 @@
+/**
+ * 设计变量 —— 「今天练了吗」
+ * 调性：大众减脂塑形，活力鼓励、低门槛。
+ * 主色「炽橙」只用于打卡 CTA 与关键强调（连续天数）；
+ * 「打卡绿」只用于成功/点亮状态；日常界面保持冷调灰白，克制不花。
+ */
+page {
+  /* 品牌色 */
+  --color-primary: #FF5C38;        /* 炽橙：快速打卡按钮、tabBar 选中、关键数字 */
+  --color-primary-deep: #E6461F;   /* 炽橙按压态 */
+  --color-primary-soft: #FFF0EB;   /* 炽橙浅底：标签、推荐卡底纹 */
+  --color-success: #00B578;        /* 打卡绿：已打卡、日历点亮 */
+  --color-success-soft: #E6F7F0;   /* 打卡绿浅底 */
+
+  /* 文字色阶 */
+  --color-text: #242833;           /* 主文字 */
+  --color-text-secondary: #7A8090; /* 次级文字 */
+  --color-text-tertiary: #A6ACBD;  /* 弱化文字 / tabBar 未选中 */
+
+  /* 背景与卡片 */
+  --color-bg: #F4F6FA;             /* 页面背景（冷调灰白） */
+  --color-card: #FFFFFF;           /* 卡片 */
+  --color-line: #EDEFF4;           /* 分割线 */
+
+  /* 圆角 */
+  --radius-lg: 24rpx;              /* 卡片 */
+  --radius-md: 16rpx;              /* 小块 */
+  --radius-pill: 999rpx;           /* 胶囊按钮 */
+
+  /* 间距 */
+  --space-xs: 8rpx;
+  --space-sm: 16rpx;
+  --space-md: 24rpx;
+  --space-lg: 32rpx;
+  --space-xl: 48rpx;
+
+  /* 字号 */
+  --font-size-xs: 22rpx;
+  --font-size-sm: 26rpx;
+  --font-size-md: 30rpx;
+  --font-size-lg: 34rpx;
+  --font-size-xl: 40rpx;
+}
