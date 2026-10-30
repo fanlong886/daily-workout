@@ -124,12 +124,13 @@ Page({
   },
 
   onRecordDetailClose() {
-    this.setData({ activeRecord: null });
+    // canvas 因弹层打开被 wx:if 卸载，关闭后需重建重绘
+    this.setData({ activeRecord: null }, () => this.drawWeightChart());
   },
 
   // 记录被编辑：刷新列表与摘要（连续天数不变，保守起见全刷）
   onRecordUpdated() {
-    this.setData({ activeRecord: null });
+    this.setData({ activeRecord: null }, () => this.drawWeightChart());
     this.refreshSummary();
     this.refreshCalendar();
     this.refreshRecords(true);
@@ -137,16 +138,10 @@ Page({
 
   // 记录被删除：同步首页/摘要的连续天数口径
   onRecordDeleted(e) {
-    this.setData({ activeRecord: null });
+    this.setData({ activeRecord: null }, () => this.drawWeightChart());
     this.refreshSummary();
     this.refreshCalendar();
     this.refreshRecords(true);
-    // 通知首页刷新（若用户切回时 onShow 也会刷，这里仅触发一次提前同步）
-    this.refreshTodayBadge(e.detail.streak);
-  },
-
-  refreshTodayBadge() {
-    // 预留：跨页状态同步由各页 onShow 自行刷新，无需额外处理
   },
 
   // 打开/关闭体重录入弹层
@@ -155,11 +150,12 @@ Page({
   },
 
   onBodyEditorClose() {
-    this.setData({ showBodyEditor: false });
+    // canvas 因弹层打开被 wx:if 卸载，关闭后需重建重绘
+    this.setData({ showBodyEditor: false }, () => this.drawWeightChart());
   },
 
   onBodyCreated() {
-    this.setData({ showBodyEditor: false });
+    this.setData({ showBodyEditor: false }, () => this.drawWeightChart());
     wx.showToast({ title: '已记录', icon: 'success' });
     this.refreshWeight();
   },

@@ -24,6 +24,7 @@ Component({
     intensities: ['低', '中', '高'],
     intensity: '中',
     note: '',
+    hasPhoto: false, // 该记录是否带照片
     submitting: false,
     deleting: false
   },
@@ -41,9 +42,17 @@ Component({
           duration: r.duration_min,
           intensity: r.intensity,
           note: r.note || '',
+          hasPhoto: !!r.photo_file_id,
           submitting: false,
           deleting: false
         });
+      }
+    },
+
+    // 查看态行
+    onPreviewPhoto() {
+      if (this.data.record && this.data.record.photo_file_id) {
+        wx.previewImage({ urls: [this.data.record.photo_file_id] });
       }
     },
 

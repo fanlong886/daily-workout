@@ -24,6 +24,15 @@
         <text class="detail-label">备注</text>
         <text class="detail-value">{{record.note}}</text>
       </view>
+      <view class="detail-row" wx:if="{{hasPhoto}}">
+        <text class="detail-label">照片</text>
+        <image
+          class="detail-photo"
+          src="{{record.photo_file_id}}"
+          mode="aspectFill"
+          bindtap="onPreviewPhoto"
+        />
+      </view>
 
       <view class="action-row">
         <button class="action-btn action-delete" bindtap="onDelete" disabled="{{deleting}}">删除</button>

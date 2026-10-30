@@ -154,6 +154,58 @@
   font-size: var(--font-size-sm);
 }
 
+/* 照片区（可选） */
+.photo-row {
+  display: flex;
+}
+
+.photo-add {
+  width: 160rpx;
+  height: 160rpx;
+  border: 2rpx dashed var(--color-text-tertiary);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+}
+
+.photo-add-icon {
+  font-size: 44rpx;
+}
+
+.photo-add-text {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+}
+
+.photo-preview-box {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.photo-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+}
+
+.photo-remove {
+  position: absolute;
+  top: -14rpx;
+  right: -14rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: rgba(36, 40, 51, 0.75);
+  color: #FFFFFF;
+  font-size: 22rpx;
+  text-align: center;
+  line-height: 40rpx;
+}
+
 /* 完成打卡按钮 */
 .confirm-btn {
   margin-top: var(--space-lg);

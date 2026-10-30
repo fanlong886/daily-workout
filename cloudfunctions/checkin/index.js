@@ -270,6 +270,15 @@ async function handleDelete(openid, event) {
 
   await checkinsCollection.doc(event.checkin_id).remove();
 
+  // 顺带清理云存储照片，避免孤儿文件；清理失败不影响删除结果
+  if (found.doc.photo_file_id) {
+    try {
+      await cloud.deleteFile({ fileList: [found.doc.photo_file_id] });
+    } catch (e) {
+      console.warn('[checkin] 删除照片文件失败:', e);
+    }
+  }
+
   const date = todayStr();
   const dateSet = await loadUserDateSet(openid);
   const checkedToday = dateSet.has(date);

@@ -20,7 +20,8 @@ Component({
     duration: 20,        // 时长（分钟），默认 20
     intensities: ['低', '中', '高'],
     selectedIntensity: '中',
-    note: ''
+    note: '',
+    photoPath: ''        // 本地临时照片路径（确认打卡时上传云存储）
   },
 
   methods: {
@@ -84,6 +85,41 @@ Component({
       this.setData({ note: e.detail.value });
     },
 
+    // 选照片/拍照：单张、压缩（P0 仅支持单张 photo_file_id）
+    choosePhoto() {
+      wx.chooseMedia({
+        count: 1,
+        mediaType: ['image'],
+        sourceType: ['album', 'camera'],
+        sizeType: ['compressed'],
+        success: (res) => {
+          this.setData({ photoPath: res.tempFiles[0].tempFilePath });
+        }
+      });
+    },
+
+    clearPhoto() {
+      this.setData({ photoPath: '' });
+    },
+
+    // 上传照片到云存储，返回 fileID；无照片或上传失败返回 ''（照片可选，失败不阻塞打卡）
+    uploadPhotoIfNeeded() {
+      const path = this.data.photoPath;
+      if (!path) return Promise.resolve('');
+
+      const dot = path.lastIndexOf('.');
+      const ext = dot > -1 ? path.slice(dot) : '.jpg';
+      const cloudPath = 'checkins/' + Date.now() + '-' + Math.floor(Math.random() * 10000) + ext;
+
+      return wx.cloud
+        .uploadFile({ cloudPath: cloudPath, filePath: path })
+        .then((res) => res.fileID)
+        .catch(() => {
+          wx.showToast({ title: '照片上传失败，已跳过', icon: 'none' });
+          return '';
+        });
+    },
+
     onConfirm() {
       if (this.data.submitting) return;
       if (!this.data.selectedTypeId) {
@@ -91,16 +127,19 @@ Component({
         return;
       }
       this.setData({ submitting: true });
-      request
-        .call('checkin', {
-          action: 'create',
-          type_id: this.data.selectedTypeId,
-          duration_min: this.data.duration,
-          intensity: this.data.selectedIntensity,
-          note: this.data.note
+      this.uploadPhotoIfNeeded()
+        .then((fileID) => {
+          return request.call('checkin', {
+            action: 'create',
+            type_id: this.data.selectedTypeId,
+            duration_min: this.data.duration,
+            intensity: this.data.selectedIntensity,
+            note: this.data.note,
+            photo_file_id: fileID
+          });
         })
         .then((res) => {
-          this.setData({ submitting: false });
+          this.setData({ submitting: false, photoPath: '' });
           this.triggerEvent('created', {
             streak: res.streak_after,
             date: res.date,

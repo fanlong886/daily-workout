@@ -59,6 +59,13 @@
   color: var(--color-text);
 }
 
+/* 详情照片：云存储 fileID 直接作为 image src */
+.detail-photo {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: var(--radius-md);
+}
+
 /* 操作按钮：删除（红） + 编辑（主色） */
 .action-row {
   display: flex;
