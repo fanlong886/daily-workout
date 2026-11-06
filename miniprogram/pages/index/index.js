@@ -1,5 +1,8 @@
 // 今日页：打卡台。数据来自 checkin.todayStatus / checkin.create（蓝图 §9.3）
 const request = require('../../utils/request.js');
+const config = require('../../config.js');
+
+const app = getApp();
 
 Page({
   data: {
@@ -61,6 +64,19 @@ Page({
       streakDays: streak,
       weekCount: this.data.weekCount + 1, // 本地 +1，与云端口径下次 onShow 校正
       successInfo: { streak: streak, date: date, badges: badges || [] }
+    });
+    this.renewReminderQuota();
+  },
+
+  // 打卡成功后的提醒续订：一次性订阅消耗一次配额，靠每日打卡补回。
+  // 用户勾选过"总是保持以上选择"时静默通过，不弹窗
+  renewReminderQuota() {
+    const profile = app.globalData.profile;
+    if (!profile || !profile.reminderEnabled) return;
+
+    wx.requestSubscribeMessage({
+      tmplIds: [config.REMINDER_TEMPLATE_ID],
+      complete: () => {} // 结果不影响打卡主链路；拒绝则下次 20:00 无推送
     });
   },
 

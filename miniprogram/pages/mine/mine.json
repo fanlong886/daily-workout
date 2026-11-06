@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "share-poster": "/components/share-poster/index"
+    "share-poster": "/components/share-poster/index",
+    "reminder-editor": "/components/reminder-editor/index"
   },
   "navigationBarTitleText": "我的"
 }

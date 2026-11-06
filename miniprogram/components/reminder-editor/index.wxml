@@ -1,0 +1,30 @@
+<!-- 每日提醒设置弹层：开关（含订阅授权）+ 时间选择 -->
+<view class="mask" wx:if="{{visible}}" bindtap="onClose">
+  <view class="panel" catchtap="noop">
+    <view class="panel-header">
+      <text class="panel-title">每日提醒</text>
+      <text class="panel-close" bindtap="onClose">✕</text>
+    </view>
+
+    <view class="row">
+      <view class="row-main">
+        <view class="row-title">每天提醒我打卡</view>
+        <view class="row-desc">微信服务通知推送，当天已打卡则不打扰</view>
+      </view>
+      <switch checked="{{enabled}}" color="#FF5C38" bindchange="onSwitchChange" />
+    </view>
+
+    <view class="row" wx:if="{{enabled}}">
+      <view class="row-main">
+        <view class="row-title">提醒时间</view>
+      </view>
+      <picker mode="time" value="{{time}}" bindchange="onTimeChange">
+        <view class="time-value">{{time}}</view>
+      </picker>
+    </view>
+
+    <view class="tip">
+      一次性订阅说明：每次打卡会自动续订下一次提醒；长期未打卡续订会中断，回到小程序打卡即可恢复。
+    </view>
+  </view>
+</view>

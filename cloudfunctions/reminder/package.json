@@ -1,0 +1,9 @@
+{
+  "name": "reminder",
+  "version": "1.0.0",
+  "description": "每日打卡提醒：定时推送订阅消息（P1，蓝图 §3）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

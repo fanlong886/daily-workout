@@ -8,7 +8,8 @@ Page({
     nickname: '',
     goal: '减脂',
     avatarText: '练', // 头像占位：昵称首字
-    showPoster: false // 分享海报弹层
+    showPoster: false,     // 分享海报弹层
+    showReminder: false    // 每日提醒设置弹层
   },
 
   onShow() {
@@ -62,6 +63,15 @@ Page({
 
   onPosterClose() {
     this.setData({ showPoster: false });
+  },
+
+  // 每日提醒设置弹层
+  onReminder() {
+    this.setData({ showReminder: true });
+  },
+
+  onReminderClose() {
+    this.setData({ showReminder: false });
   },
 
   onAbout() {

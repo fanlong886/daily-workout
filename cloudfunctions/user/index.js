@@ -11,6 +11,7 @@ const usersCollection = db.collection('users');
 
 const GENDERS = ['unknown', 'male', 'female'];
 const GOALS = ['减脂', '塑形', '保持'];
+const TIME_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
 
 const ok = (data) => ({ code: 0, message: 'ok', data: data });
 const fail = (code, message) => ({ code: code, message: message, data: null });
@@ -24,6 +25,8 @@ function toProfile(doc) {
     gender: doc.gender || 'unknown',
     heightCm: doc.height_cm === undefined ? null : doc.height_cm,
     goal: doc.goal,
+    reminderEnabled: !!doc.reminder_enabled,
+    reminderTime: doc.reminder_time || '20:00',
     createdAt: doc.created_at instanceof Date ? doc.created_at.toISOString() : doc.created_at,
     lastActiveAt: doc.last_active_at instanceof Date ? doc.last_active_at.toISOString() : doc.last_active_at
   };
@@ -68,6 +71,16 @@ async function handleUpdate(openid, event) {
   if (event.goal !== undefined) {
     if (GOALS.indexOf(event.goal) === -1) return fail(1002, '参数有误：goal');
     patch.goal = event.goal;
+  }
+  if (event.reminder_enabled !== undefined) {
+    if (typeof event.reminder_enabled !== 'boolean') return fail(1002, '参数有误：reminder_enabled');
+    patch.reminder_enabled = event.reminder_enabled;
+  }
+  if (event.reminder_time !== undefined) {
+    if (typeof event.reminder_time !== 'string' || !TIME_RE.test(event.reminder_time)) {
+      return fail(1002, '参数有误：提醒时间需为 HH:mm 格式');
+    }
+    patch.reminder_time = event.reminder_time;
   }
 
   if (Object.keys(patch).length === 0) return fail(1002, '参数有误：至少传一个可更新字段');
