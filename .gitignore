@@ -7,3 +7,6 @@ project.private.config.json
 # 系统文件
 .DS_Store
 Thumbs.db
+
+# 执行计划的 scratch 工作区（ledger 已入 git 历史）
+.superpowers/
