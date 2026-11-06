@@ -1,0 +1,28 @@
+<!-- 分享海报弹层：生成中 loading / 成品预览 + 保存/分享 -->
+<view class="mask" wx:if="{{show}}" bindtap="close">
+  <view class="panel" catchtap="noop">
+    <view class="panel-header">
+      <text class="panel-title">打卡海报</text>
+      <text class="panel-close" bindtap="close">✕</text>
+    </view>
+
+    <!-- 离屏绘制用 canvas：同层渲染失效时会穿透，故放到屏幕外并只在生成期间挂载 -->
+    <canvas
+      wx:if="{{generating && !posterPath}}"
+      type="2d"
+      id="posterCanvas"
+      class="poster-canvas"
+    ></canvas>
+
+    <view wx:if="{{generating}}" class="generating">海报绘制中…</view>
+
+    <block wx:elif="{{posterPath}}">
+      <image class="poster-preview" src="{{posterPath}}" mode="aspectFit" />
+      <view class="action-row">
+        <button class="action-btn action-save" bindtap="onSave">保存相册</button>
+        <button class="action-btn action-share" bindtap="onShareMenu">分享好友</button>
+      </view>
+      <view class="poster-tip">也可以保存后自己发朋友圈</view>
+    </block>
+  </view>
+</view>

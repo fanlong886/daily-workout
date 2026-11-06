@@ -10,10 +10,20 @@ const db = cloud.database();
 const _ = db.command;
 const checkinsCollection = db.collection('checkins');
 const typesCollection = db.collection('training_types');
+const userBadgesCollection = db.collection('user_achievements');
 
 const INTENSITIES = ['低', '中', '高'];
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const MONTH_RE = /^\d{4}-\d{2}$/;
+
+// 徽章定义（与 achievements 云函数内保持一致；阈值 = 历史最长连续打卡天数）
+const BADGES = [
+  { code: 'streak_3', name: '星火', icon: '🔥', desc: '连续打卡 3 天', threshold: 3 },
+  { code: 'streak_7', name: '一周之约', icon: '📅', desc: '连续打卡 7 天', threshold: 7 },
+  { code: 'streak_21', name: '习惯成型', icon: '💪', desc: '连续打卡 21 天', threshold: 21 },
+  { code: 'streak_50', name: '半百征程', icon: '🏅', desc: '连续打卡 50 天', threshold: 50 },
+  { code: 'streak_100', name: '百日筑基', icon: '🏆', desc: '连续打卡 100 天', threshold: 100 }
+];
 
 const ok = (data) => ({ code: 0, message: 'ok', data: data });
 const fail = (code, message) => ({ code: code, message: message, data: null });
@@ -47,6 +57,53 @@ function calcStreak(dateSet, today, checkedToday) {
     cursor.setUTCDate(cursor.getUTCDate() - 1);
   }
   return streak;
+}
+
+// 历史最长连续打卡天数：排序日期后扫描连续段（徽章解锁口径，只增不减）
+function calcLongestStreak(dateSet) {
+  const dates = Array.from(dateSet).sort();
+  let longest = 0;
+  let cur = 0;
+  let prevMs = null;
+  dates.forEach((date) => {
+    const ms = Date.parse(date + 'T00:00:00Z');
+    if (prevMs !== null && ms - prevMs === 24 * 3600 * 1000) {
+      cur++;
+    } else {
+      cur = 1;
+    }
+    if (cur > longest) longest = cur;
+    prevMs = ms;
+  });
+  return longest;
+}
+
+// 打卡后的徽章解锁检查：最长连续达标且未持有的徽章入库，返回新解锁列表。
+// 徽章环节失败不影响打卡本身（打卡是主链路，徽章是增益）
+async function unlockBadges(openid, longest) {
+  const newly = [];
+  try {
+    const ownedRes = await userBadgesCollection.where({ user_id: openid }).limit(100).get();
+    const owned = new Set(ownedRes.data.map((item) => item.code));
+
+    for (const def of BADGES) {
+      if (longest >= def.threshold && !owned.has(def.code)) {
+        await userBadgesCollection.add({
+          data: { user_id: openid, code: def.code, unlocked_at: db.serverDate() }
+        });
+        newly.push({
+          code: def.code,
+          name: def.name,
+          icon: def.icon,
+          desc: def.desc,
+          threshold: def.threshold
+        });
+      }
+    }
+  } catch (e) {
+    console.warn('[checkin] 徽章解锁检查失败:', e);
+  }
+  return newly;
 }
 
 // 取本人全部打卡日期（去重）；个人记录量小，一次拉取内存计算
@@ -140,11 +197,16 @@ async function handleCreate(openid, event) {
   dateSet.add(date);
   const streakAfter = calcStreak(dateSet, date, true);
 
+  // 徽章解锁检查（口径：历史最长连续打卡天数）
+  const longest = calcLongestStreak(dateSet);
+  const newBadges = await unlockBadges(openid, longest);
+
   return ok({
     checkin_id: added._id,
     date: date,
     is_today_first: isTodayFirst,
-    streak_after: streakAfter
+    streak_after: streakAfter,
+    new_badges: newBadges
   });
 }
 

@@ -1,0 +1,9 @@
+{
+  "name": "achievements",
+  "version": "1.0.0",
+  "description": "成就徽章：list 徽章墙（P1，蓝图 §3）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

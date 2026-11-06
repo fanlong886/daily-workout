@@ -1,0 +1,32 @@
+<!-- 徽章墙：解锁亮色 / 未解锁灰色带进度 -->
+<view class="page">
+  <view class="card longest-card">
+    <view class="longest-num">{{longestStreak}}</view>
+    <view class="longest-label">历史最长连续（天）</view>
+  </view>
+
+  <block wx:if="{{loading}}">
+    <view class="placeholder-box">加载中…</view>
+  </block>
+
+  <view wx:else class="badge-grid">
+    <view
+      wx:for="{{badges}}"
+      wx:key="code"
+      class="card badge-card {{item.unlocked ? 'badge-unlocked' : 'badge-locked'}}"
+    >
+      <view class="badge-icon">{{item.unlocked ? item.icon : '🔒'}}</view>
+      <view class="badge-name">{{item.name}}</view>
+      <view class="badge-desc">{{item.desc}}</view>
+      <view wx:if="{{item.unlocked}}" class="badge-date">{{item.unlockedLabel}}</view>
+      <view wx:else class="badge-progress">
+        <view class="progress-track">
+          <view class="progress-bar" style="width: {{item.percent}}%"></view>
+        </view>
+        <view class="progress-text">{{item.progress}}/{{item.threshold}} 天</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="badge-rule">徽章按「历史最长连续打卡天数」解锁，解锁后永久持有</view>
+</view>

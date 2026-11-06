@@ -1,0 +1,96 @@
+/* 分享海报弹层 */
+.mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(36, 40, 51, 0.55);
+  z-index: 120;
+}
+
+.panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 86%;
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  max-height: 88vh;
+  box-sizing: border-box;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.panel-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.panel-close {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-lg);
+  padding: 0 var(--space-xs);
+}
+
+/* 绘制用 canvas：屏幕外挂载，避开同层渲染穿透问题 */
+.poster-canvas {
+  position: fixed;
+  left: -2000px;
+  top: 0;
+  width: 300px;
+  height: 480px;
+}
+
+.generating {
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-sm);
+  padding: var(--space-xl) 0;
+}
+
+.poster-preview {
+  width: 100%;
+  height: 640rpx;
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+}
+
+.action-row {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.action-btn {
+  flex: 1;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-md);
+  line-height: 2.4;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.action-save {
+  background: #FDECEC;
+  color: var(--color-primary);
+}
+
+.action-share {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.poster-tip {
+  margin-top: var(--space-sm);
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}

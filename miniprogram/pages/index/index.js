@@ -14,7 +14,8 @@ Page({
       duration: 15
     },
     showEditor: false,   // 打卡弹层
-    successInfo: null    // 打卡成功信息 { streak, date, isFirst }
+    successInfo: null,   // 打卡成功信息 { streak, date, badges }
+    showPoster: false    // 打卡海报弹层
   },
 
   onShow() {
@@ -53,14 +54,24 @@ Page({
 
   // 弹层打卡成功：用 create 返回值直接更新，免二次请求
   onCheckinCreated(e) {
-    const { streak, date } = e.detail;
+    const { streak, date, badges } = e.detail;
     this.setData({
       showEditor: false,
       checkedToday: true,
       streakDays: streak,
       weekCount: this.data.weekCount + 1, // 本地 +1，与云端口径下次 onShow 校正
-      successInfo: { streak: streak, date: date }
+      successInfo: { streak: streak, date: date, badges: badges || [] }
     });
+  },
+
+  // 成功弹层点击「生成打卡海报」
+  onSuccessShare() {
+    this.setData({ showPoster: true });
+  },
+
+  // 海报弹层关闭
+  onPosterClose() {
+    this.setData({ showPoster: false });
   },
 
   // 成功弹层关闭

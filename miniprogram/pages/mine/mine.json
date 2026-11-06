@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "share-poster": "/components/share-poster/index"
+  },
   "navigationBarTitleText": "我的"
 }

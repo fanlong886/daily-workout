@@ -46,5 +46,10 @@
   visible="{{successInfo !== null}}"
   streak="{{successInfo ? successInfo.streak : 0}}"
   date="{{successInfo ? successInfo.date : ''}}"
+  new-badges="{{successInfo ? successInfo.badges : []}}"
+  bindshare="onSuccessShare"
   bindclose="onSuccessClose"
 />
+
+<!-- 打卡分享海报 -->
+<share-poster show="{{showPoster}}" bindclose="onPosterClose" />

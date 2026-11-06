@@ -16,8 +16,18 @@
       <text class="menu-arrow">›</text>
     </view>
     <view class="divider"></view>
+    <view class="menu-item" bindtap="onBadges">
+      <text>我的徽章</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="divider"></view>
     <view class="menu-item" bindtap="onBodyRecord">
       <text>体重记录</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="divider"></view>
+    <view class="menu-item" bindtap="onSharePoster">
+      <text>分享海报</text>
       <text class="menu-arrow">›</text>
     </view>
     <view class="divider"></view>
@@ -32,3 +42,6 @@
     </view>
   </view>
 </view>
+
+<!-- 分享海报弹层 -->
+<share-poster show="{{showPoster}}" bindclose="onPosterClose" />

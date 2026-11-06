@@ -7,7 +7,8 @@ Page({
   data: {
     nickname: '',
     goal: '减脂',
-    avatarText: '练' // 头像占位：昵称首字
+    avatarText: '练', // 头像占位：昵称首字
+    showPoster: false // 分享海报弹层
   },
 
   onShow() {
@@ -47,6 +48,20 @@ Page({
   // 体重记录 → 切到数据 tab（录入与曲线都在那里）
   onBodyRecord() {
     wx.switchTab({ url: '/pages/stats/stats' });
+  },
+
+  // 徽章墙
+  onBadges() {
+    wx.navigateTo({ url: '/pages/badges/badges' });
+  },
+
+  // 分享海报弹层
+  onSharePoster() {
+    this.setData({ showPoster: true });
+  },
+
+  onPosterClose() {
+    this.setData({ showPoster: false });
   },
 
   onAbout() {

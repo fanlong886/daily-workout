@@ -9,7 +9,19 @@
     </view>
     <view class="done-sub">已连续坚持 {{streak}} 天，明天见</view>
 
-    <!-- 每日提醒引导：P1 接订阅消息，本批占位 -->
+    <!-- 新解锁徽章 -->
+    <view class="new-badges" wx:if="{{newBadges.length > 0}}">
+      <view class="new-badges-label">🎁 解锁新徽章</view>
+      <view class="new-badge-item" wx:for="{{newBadges}}" wx:key="code">
+        <text class="new-badge-icon">{{item.icon}}</text>
+        <text class="new-badge-name">{{item.name}}</text>
+        <text class="new-badge-desc">{{item.desc}}</text>
+      </view>
+    </view>
+
+    <view class="poster-btn" bindtap="onSharePoster">🖼️ 生成打卡海报</view>
+
+    <!-- 每日提醒引导：P1 后续接订阅消息，占位 -->
     <view class="remind-placeholder">开启每日提醒，不断更（即将上线）</view>
 
     <button class="btn-primary done-btn" bindtap="onDone">好的</button>

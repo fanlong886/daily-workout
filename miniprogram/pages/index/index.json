@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "checkin-editor": "/components/checkin-editor/index",
-    "checkin-success": "/components/checkin-success/index"
+    "checkin-success": "/components/checkin-success/index",
+    "share-poster": "/components/share-poster/index"
   },
   "navigationBarTitleText": "今天练了吗"
 }
