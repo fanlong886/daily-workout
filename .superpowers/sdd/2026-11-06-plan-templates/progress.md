@@ -14,3 +14,11 @@ Task 5: complete (commit $(git rev-parse --short HEAD), tests: node --check plan
 Task 4/6: Ruling: app.json 同时注册 plan-detail/workout 两页，CLI 编译验证合并执行；plans 集合未建，官方列表空态为预期，完整形态待 Task 7 用户导入数据后复验。
 Task 4/6: complete (验证: wechatide simulator_open_page pages/plan/plan → success; simulator_screenshot → 空态渲染正确无报错 → PASS)
 Task 7: complete (commit e269de7 + 本次补全, tests: node --check index.js → PASS; 端到端待用户部署集合与导入数据后验收)
+Final: fixed #1 plan_items 缺 plan_id —— 数据预置 _id+plan_id 关联，JSON 回读校验 0 失败 → PASS
+Final: fixed #2 两步流程重试重复打卡 —— checkin.create 对同 plan_id+plan_day 幂等返回既有记录，node --check → PASS
+Final: fixed #3 quit 后前端死路 —— 详情页 quit 态显示"重新开始"（join 云端仅查 ongoing，天然支持重开），node --check → PASS
+Final: fixed #4 完成态未展示 —— plan.list 增加 completed 查询 + 计划页完成卡，node --check → PASS
+Final: deferred minors: #5 join 竞态（单用户产品可接受）、#6 计划打卡未校验归属、#7 loadTypeNameMap 未过滤 enabled（下架类型或致死锁天）、#8 workout 无错误态分支、#9 详情页双请求、#10 completeDay 软失败提示、#11 查询串行、#12 蓝图错误码表未补 2004/2005
+Task 7: 端到端验收通过（用户确认：加入计划→跟练计时→完成打卡→进度推进→首页任务卡全链路 OK；部署含 3 集合新建与数据导入、plan/checkin 云函数部署）
+Final review: fresh reviewer（general-purpose subagent）1 Critical + 3 Important 已单轮修复并通过验证；8 Minor 记录延后。
+Final: P1-4 验收通过，P1 全部完成。
