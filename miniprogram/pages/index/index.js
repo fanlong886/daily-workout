@@ -124,6 +124,12 @@ Page({
 
   // 今日推荐入口：跟练为 P1，本批占位
   onRecommendTap() {
-    wx.showToast({ title: '跟练功能下一批次上线', icon: 'none' });
+    if (this.data.planToday) {
+      wx.navigateTo({
+        url: '/pages/workout/workout?plan_id=' + this.data.planToday.plan_id + '&day_no=' + this.data.planToday.day_no
+      });
+      return;
+    }
+    wx.showToast({ title: '跟练功能可从「计划」页开始', icon: 'none' });
   }
 });
