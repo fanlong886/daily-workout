@@ -18,11 +18,17 @@
   <!-- 快速打卡大按钮：3 步打卡的入口 -->
   <button class="btn-primary checkin-btn" bindtap="onQuickCheckin">+ 快速打卡</button>
 
-  <!-- 今日推荐训练卡（占位：跟练为 P1） -->
+  <!-- 今日训练入口：有进行中计划显示今日任务，否则占位推荐 -->
   <view class="card recommend-card" bindtap="onRecommendTap">
-    <view class="recommend-tag">今日推荐</view>
-    <view class="recommend-title">{{recommend.title}}</view>
-    <view class="recommend-desc">{{recommend.desc}} · {{recommend.duration}} 分钟</view>
+    <view class="recommend-tag">{{planToday ? '计划 · 今日任务' : '今日推荐'}}</view>
+    <block wx:if="{{planToday}}">
+      <view class="recommend-title">{{planToday.icon}} {{planToday.title}}</view>
+      <view class="recommend-desc">Day {{planToday.day_no}} · {{planToday.duration_min}} 分钟 · 点击开始跟练</view>
+    </block>
+    <block wx:else>
+      <view class="recommend-title">{{recommend.title}}</view>
+      <view class="recommend-desc">{{recommend.desc}} · {{recommend.duration}} 分钟</view>
+    </block>
   </view>
 
   <!-- 本周概览：stats.summary.week_count -->

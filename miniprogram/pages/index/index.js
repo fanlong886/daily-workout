@@ -16,6 +16,7 @@ Page({
       desc: '低冲击 · 无器械 · 客厅就能练',
       duration: 15
     },
+    planToday: null,     // 进行中计划的今日任务 {plan_id, day_no, title, icon, duration_min}（有则替代推荐卡）
     showEditor: false,   // 打卡弹层
     successInfo: null,   // 打卡成功信息 { streak, date, badges }
     showPoster: false    // 打卡海报弹层
@@ -25,6 +26,27 @@ Page({
     // onShow 而非 onLoad：从其他 tab 返回时刷新今日状态
     this.refreshTodayStatus();
     this.refreshWeekCount();
+    this.refreshPlanToday();
+  },
+
+  // 进行中计划的今日任务：有则首页推荐位显示计划任务（plan.list my 分支）
+  refreshPlanToday() {
+    request
+      .call('plan', { action: 'list' })
+      .then((res) => {
+        const my = res.my;
+        if (!my || !my.days) {
+          this.setData({ planToday: null });
+          return;
+        }
+        const next = my.days.find((d) => !d.done) || null;
+        this.setData({
+          planToday: next
+            ? { plan_id: my.plan_id, day_no: next.day_no, title: next.title, icon: next.icon, duration_min: next.duration_min }
+            : null
+        });
+      })
+      .catch(() => {});
   },
 
   // 本周概览：首页只用到 week_count，与数据页 summary 共用接口
