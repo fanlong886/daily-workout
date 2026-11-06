@@ -1,0 +1,45 @@
+<!-- 计划详情：信息 + 天任务列表 + 开始/继续 -->
+<view class="page">
+  <block wx:if="{{loading}}">
+    <view class="placeholder-box">加载中…</view>
+  </block>
+
+  <block wx:else>
+    <!-- 计划信息卡 -->
+    <view class="card plan-hero">
+      <view class="hero-cover">{{plan.cover}}</view>
+      <view class="hero-title">{{plan.title}}</view>
+      <view class="hero-meta">{{plan.level}} · {{plan.total_days}} 天 · {{plan.goal_tag}}</view>
+      <view class="hero-desc">{{plan.description}}</view>
+    </view>
+
+    <!-- 天任务列表 -->
+    <view class="days-card card">
+      <view
+        wx:for="{{items}}"
+        wx:key="day_no"
+        class="day-row {{item.done ? 'day-done' : ''}}"
+      >
+        <view class="day-badge">{{item.done ? '✓' : item.day_no}}</view>
+        <view class="day-info">
+          <view class="day-title">Day {{item.day_no}} · {{item.title}}</view>
+          <view class="day-meta">{{item.icon}} {{item.duration_min}} 分钟 · {{item.tips}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部操作 -->
+    <view class="bottom-action">
+      <block wx:if="{{!joined}}">
+        <button class="btn-primary {{joining ? 'btn-disabled' : ''}}" bindtap="onJoin" disabled="{{joining}}">
+          {{joining ? '加入中…' : '开始这个计划'}}
+        </button>
+      </block>
+      <block wx:elif="{{myStatus === 'ongoing'}}">
+        <button class="btn-primary" bindtap="onContinue">继续跟练</button>
+      </block>
+      <view wx:elif="{{myStatus === 'completed'}}" class="completed-label">🎉 你已完成这个计划</view>
+      <view wx:else class="completed-label">已放弃，可重新在计划页开始</view>
+    </view>
+  </block>
+</view>

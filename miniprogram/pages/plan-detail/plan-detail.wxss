@@ -1,0 +1,105 @@
+/* 计划详情页样式 */
+.plan-hero {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.hero-cover {
+  font-size: 80rpx;
+  line-height: 1.4;
+}
+
+.hero-title {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.hero-meta {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+}
+
+.hero-desc {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* 天任务列表 */
+.days-card {
+  margin-bottom: calc(var(--space-xl) + 120rpx);
+}
+
+.day-row {
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm) 0;
+}
+
+.day-badge {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-align: center;
+  line-height: 60rpx;
+  flex-shrink: 0;
+}
+
+.day-done .day-badge {
+  background: var(--color-success);
+  color: #FFFFFF;
+}
+
+.day-info {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--space-md);
+}
+
+.day-title {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.day-done .day-title {
+  color: var(--color-text-tertiary);
+  text-decoration: line-through;
+}
+
+.day-meta {
+  margin-top: 4rpx;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 底部固定操作 */
+.bottom-action {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-md) var(--space-lg) calc(var(--space-md) + env(safe-area-inset-bottom));
+  background: var(--color-card);
+  box-shadow: 0 -4rpx 16rpx rgba(31, 35, 48, 0.06);
+}
+
+.bottom-action .btn-disabled {
+  opacity: 0.6;
+}
+
+.completed-label {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-success);
+  padding: var(--space-sm) 0;
+}

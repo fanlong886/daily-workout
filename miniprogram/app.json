@@ -6,7 +6,9 @@
     "pages/mine/mine",
     "pages/profile-edit/profile-edit",
     "pages/badges/badges",
-    "pages/square/square"
+    "pages/square/square",
+    "pages/plan-detail/plan-detail",
+    "pages/workout/workout"
   ],
   "window": {
     "navigationBarTitleText": "今天练了吗",
