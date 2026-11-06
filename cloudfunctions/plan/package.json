@@ -1,0 +1,9 @@
+{
+  "name": "plan",
+  "version": "1.0.0",
+  "description": "计划模板：list/detail/join/completeDay/quit（P1-4，蓝图 §3/§6）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}
