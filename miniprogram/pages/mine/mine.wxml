@@ -16,6 +16,11 @@
       <text class="menu-arrow">›</text>
     </view>
     <view class="divider"></view>
+    <view class="menu-item" bindtap="onSquare">
+      <text>打卡广场</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="divider"></view>
     <view class="menu-item" bindtap="onBadges">
       <text>我的徽章</text>
       <text class="menu-arrow">›</text>

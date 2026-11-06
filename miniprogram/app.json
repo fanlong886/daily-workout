@@ -5,7 +5,8 @@
     "pages/stats/stats",
     "pages/mine/mine",
     "pages/profile-edit/profile-edit",
-    "pages/badges/badges"
+    "pages/badges/badges",
+    "pages/square/square"
   ],
   "window": {
     "navigationBarTitleText": "今天练了吗",

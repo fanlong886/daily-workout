@@ -66,6 +66,15 @@
         </view>
       </view>
 
+      <!-- 分享到打卡广场：feed 仅展示昵称/类型/时长，不含备注与照片 -->
+      <view class="square-row">
+        <view class="square-main">
+          <text class="square-label">分享到打卡广场</text>
+          <text class="square-desc">他人仅可见昵称、训练类型和时长</text>
+        </view>
+        <switch checked="{{shareToSquare}}" color="#FF5C38" bindchange="onSquareChange" />
+      </view>
+
       <!-- 完成打卡：默认值兜底，0 必填，3 步内的最后一步 -->
       <button class="btn-primary confirm-btn {{submitting ? 'btn-disabled' : ''}}" bindtap="onConfirm" disabled="{{submitting}}">
         {{submitting ? (photoPath ? '上传打卡中…' : '打卡中…') : '完成打卡'}}

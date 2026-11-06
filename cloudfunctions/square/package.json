@@ -1,0 +1,9 @@
+{
+  "name": "square",
+  "version": "1.0.0",
+  "description": "打卡广场：list 公开 feed / like 点赞切换（P1，蓝图 §3）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

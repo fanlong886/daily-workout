@@ -206,6 +206,33 @@
   line-height: 40rpx;
 }
 
+/* 广场分享开关行 */
+.square-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+}
+
+.square-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.square-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.square-desc {
+  margin-top: 4rpx;
+  font-size: 20rpx;
+  color: var(--color-text-tertiary);
+}
+
 /* 完成打卡按钮 */
 .confirm-btn {
   margin-top: var(--space-lg);

@@ -1,0 +1,43 @@
+<!-- 打卡广场：公开打卡动态（只读 + 点赞） -->
+<view class="page">
+  <block wx:if="{{loading}}">
+    <view class="placeholder-box">加载中…</view>
+  </block>
+
+  <block wx:else>
+    <view
+      wx:for="{{list}}"
+      wx:key="_id"
+      class="card feed-item"
+    >
+      <view class="feed-header">
+        <view wx:if="{{item.avatar_url}}" class="feed-avatar">
+          <image class="feed-avatar-img" src="{{item.avatar_url}}" mode="aspectFill" />
+        </view>
+        <view wx:else class="feed-avatar feed-avatar-text">{{item.nickname[0]}}</view>
+        <view class="feed-user">
+          <view class="feed-nickname">{{item.nickname}}</view>
+          <view class="feed-date">{{item.date}}</view>
+        </view>
+        <view class="feed-training">
+          <text class="feed-icon">{{item.icon}}</text>
+          <text class="feed-type">{{item.type_name}}</text>
+          <text class="feed-duration">{{item.duration_min}} 分钟</text>
+        </view>
+      </view>
+
+      <view class="feed-footer">
+        <view class="like-btn {{item.liked ? 'like-active' : ''}}" data-id="{{item._id}}" bindtap="onLikeTap">
+          <text class="like-icon">{{item.liked ? '❤️' : '🤍'}}</text>
+          <text class="like-count">{{item.like_count}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{list.length === 0}}" class="placeholder-box">
+      还没有人打卡，去「今日」当第一个吧
+    </view>
+    <view wx:if="{{loadingMore}}" class="placeholder-box">加载中…</view>
+    <view wx:if="{{!hasMore && list.length > 0}}" class="list-end">— 没有更多了 —</view>
+  </block>
+</view>

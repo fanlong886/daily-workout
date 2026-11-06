@@ -51,6 +51,11 @@ Page({
     wx.switchTab({ url: '/pages/stats/stats' });
   },
 
+  // 打卡广场
+  onSquare() {
+    wx.navigateTo({ url: '/pages/square/square' });
+  },
+
   // 徽章墙
   onBadges() {
     wx.navigateTo({ url: '/pages/badges/badges' });

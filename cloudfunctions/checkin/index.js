@@ -11,6 +11,8 @@ const _ = db.command;
 const checkinsCollection = db.collection('checkins');
 const typesCollection = db.collection('training_types');
 const userBadgesCollection = db.collection('user_achievements');
+const usersCollection = db.collection('users');
+const squareFeedCollection = db.collection('square_feed');
 
 const INTENSITIES = ['低', '中', '高'];
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -156,7 +158,8 @@ async function handleTypes() {
   });
 }
 
-// 创建打卡：服务端生成 date，一天可多条；返回打卡后连续天数供成功页直接展示
+// 创建打卡：服务端生成 date，一天可多条；返回打卡后连续天数供成功页直接展示。
+// share_to_square（默认 true）：同时发布一条广场动态；失败不影响打卡主链路
 async function handleCreate(openid, event) {
   const typeId = event.type_id;
   const duration = event.duration_min;
@@ -200,6 +203,32 @@ async function handleCreate(openid, event) {
   // 徽章解锁检查（口径：历史最长连续打卡天数）
   const longest = calcLongestStreak(dateSet);
   const newBadges = await unlockBadges(openid, longest);
+
+  // 发布到打卡广场（隐私最小化：仅昵称/头像/类型/时长，不带备注和照片）
+  const shareToSquare = event.share_to_square === undefined ? true : !!event.share_to_square;
+  if (shareToSquare) {
+    try {
+      const uRes = await usersCollection.where({ openid: openid }).limit(1).get();
+      const u = uRes.data[0] || {};
+      await squareFeedCollection.add({
+        data: {
+          user_id: openid,
+          nickname: u.nickname || '健身er',
+          avatar_url: u.avatar_url || '',
+          type_id: typeId,
+          type_name: type.name,
+          icon: type.icon || '',
+          duration_min: duration,
+          date: date,
+          like_count: 0,
+          liked_by: [],
+          created_at: db.serverDate()
+        }
+      });
+    } catch (e) {
+      console.warn('[checkin] 广场发布失败（不影响打卡）:', e);
+    }
+  }
 
   return ok({
     checkin_id: added._id,

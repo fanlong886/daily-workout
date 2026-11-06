@@ -12,6 +12,14 @@ Component({
     }
   },
 
+  lifetimes: {
+    // 上次「分享到广场」的选择记忆在本地（默认开启）
+    attached() {
+      const saved = wx.getStorageSync('share_to_square');
+      this.setData({ shareToSquare: saved === '' ? true : !!saved });
+    }
+  },
+
   data: {
     loading: false,
     submitting: false,
@@ -21,7 +29,8 @@ Component({
     intensities: ['低', '中', '高'],
     selectedIntensity: '中',
     note: '',
-    photoPath: ''        // 本地临时照片路径（确认打卡时上传云存储）
+    photoPath: '',       // 本地临时照片路径（确认打卡时上传云存储）
+    shareToSquare: true  // 同时发布到打卡广场（隐私最小化：仅昵称/类型/时长）
   },
 
   methods: {
@@ -102,6 +111,13 @@ Component({
       this.setData({ photoPath: '' });
     },
 
+    // 广场分享开关：选择记忆到本地
+    onSquareChange(e) {
+      const on = !!e.detail.value;
+      this.setData({ shareToSquare: on });
+      wx.setStorageSync('share_to_square', on);
+    },
+
     // 上传照片到云存储，返回 fileID；无照片或上传失败返回 ''（照片可选，失败不阻塞打卡）
     uploadPhotoIfNeeded() {
       const path = this.data.photoPath;
@@ -135,7 +151,8 @@ Component({
             duration_min: this.data.duration,
             intensity: this.data.selectedIntensity,
             note: this.data.note,
-            photo_file_id: fileID
+            photo_file_id: fileID,
+            share_to_square: this.data.shareToSquare
           });
         })
         .then((res) => {

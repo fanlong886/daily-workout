@@ -1,0 +1,112 @@
+/* 打卡广场样式：feed 卡片 + 点赞 */
+.feed-item {
+  margin-bottom: var(--space-md);
+}
+
+.feed-header {
+  display: flex;
+  align-items: center;
+}
+
+.feed-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  text-align: center;
+  line-height: 80rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.feed-avatar-img {
+  width: 100%;
+  height: 100%;
+}
+
+.feed-user {
+  margin-left: var(--space-md);
+  min-width: 0;
+}
+
+.feed-nickname {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.feed-date {
+  margin-top: 4rpx;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* 右侧：训练类型 + 时长 */
+.feed-training {
+  margin-left: auto;
+  text-align: right;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.feed-icon {
+  font-size: var(--font-size-md);
+}
+
+.feed-type {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.feed-duration {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+/* 点赞行 */
+.feed-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1rpx solid var(--color-line);
+}
+
+.like-btn {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 4rpx var(--space-sm);
+  border-radius: var(--radius-pill);
+}
+
+.like-btn:active {
+  background: var(--color-bg);
+}
+
+.like-icon {
+  font-size: var(--font-size-sm);
+}
+
+.like-count {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.like-active .like-count {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.list-end {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  padding: var(--space-md) 0;
+}
