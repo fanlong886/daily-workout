@@ -1,8 +1,48 @@
-<!-- 计划页：P0 仅静态占位（蓝图 §9.6），计划功能为 P1 -->
+<!-- 计划页：我的进行中计划 + 官方计划列表 -->
 <view class="page">
-  <view class="empty-plan">
-    <text class="empty-emoji">📅</text>
-    <view class="empty-title">计划功能即将上线</view>
-    <view class="empty-desc">7 天入门 · 21 天减脂计划正在路上</view>
-  </view>
+  <block wx:if="{{loading}}">
+    <view class="placeholder-box">加载中…</view>
+  </block>
+
+  <block wx:else>
+    <!-- 我的进行中计划卡 -->
+    <view class="card my-plan" wx:if="{{my}}">
+      <view class="my-plan-header">
+        <text class="my-plan-title">{{my.title}}</text>
+        <text class="my-plan-progress">{{doneCount}}/{{my.total_days}} 天</text>
+      </view>
+      <view class="progress-track">
+        <view class="progress-bar" style="width: {{my.total_days ? (doneCount / my.total_days) * 100 : 0}}%"></view>
+      </view>
+      <view class="today-row" wx:if="{{todayItem}}">
+        <view class="today-info">
+          <view class="today-label">今日任务 · Day {{todayItem.day_no}}</view>
+          <view class="today-name">{{todayItem.icon}} {{todayItem.title}} · {{todayItem.duration_min}} 分钟</view>
+        </view>
+        <button class="btn-primary today-btn" bindtap="goWorkout">开始跟练</button>
+      </view>
+      <view class="today-done" wx:else>🎉 今日任务已完成，明天见！</view>
+    </view>
+    <view class="card my-plan" wx:elif="{{my === null}}" bindtap="goDetail" data-id="{{official.length ? official[0]._id : ''}}">
+      <view class="my-plan-empty">还没有进行中的计划，从下面选一个开始 👇</view>
+    </view>
+
+    <!-- 官方计划列表 -->
+    <view class="block-title">官方计划</view>
+    <view
+      wx:for="{{official}}"
+      wx:key="_id"
+      class="card plan-card"
+      data-id="{{item._id}}"
+      bindtap="goDetail"
+    >
+      <view class="plan-cover">{{item.cover}}</view>
+      <view class="plan-info">
+        <view class="plan-title">{{item.title}}</view>
+        <view class="plan-meta">{{item.level}} · {{item.total_days}} 天 · {{item.goal_tag}}</view>
+        <view class="plan-desc">{{item.description}}</view>
+      </view>
+      <text class="plan-arrow">›</text>
+    </view>
+  </block>
 </view>

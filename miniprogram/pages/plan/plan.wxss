@@ -1,21 +1,126 @@
-/* 计划页占位样式：整页居中 */
-.empty-plan {
-  padding-top: 240rpx;
-  text-align: center;
+/* 计划页样式：我的计划卡 + 官方计划列表 */
+.my-plan {
+  margin-bottom: var(--space-lg);
 }
 
-.empty-emoji {
-  font-size: 120rpx;
+.my-plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
-.empty-title {
-  margin-top: var(--space-lg);
+.my-plan-title {
   font-size: var(--font-size-lg);
   font-weight: 600;
 }
 
-.empty-desc {
-  margin-top: var(--space-sm);
+.my-plan-progress {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.progress-track {
+  margin-top: var(--space-md);
+  height: 12rpx;
+  background: var(--color-bg);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-pill);
+}
+
+.today-row {
+  margin-top: var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.today-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.today-name {
+  margin-top: 4rpx;
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.today-btn {
+  font-size: var(--font-size-sm);
+  line-height: 2.2;
+  padding: 0 var(--space-lg);
+}
+
+.today-done {
+  margin-top: var(--space-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-success);
+}
+
+.my-plan-empty {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
+}
+
+.block-title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+/* 官方计划卡 */
+.plan-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.plan-cover {
+  font-size: 64rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: var(--color-primary-soft);
+  border-radius: var(--radius-md);
+  text-align: center;
+  line-height: 100rpx;
+  flex-shrink: 0;
+}
+
+.plan-info {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--space-md);
+}
+
+.plan-title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.plan-meta {
+  margin-top: 4rpx;
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+}
+
+.plan-desc {
+  margin-top: 4rpx;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.plan-arrow {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-lg);
+  margin-left: var(--space-sm);
 }

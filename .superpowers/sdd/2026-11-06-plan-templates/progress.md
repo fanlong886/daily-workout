@@ -5,3 +5,11 @@ Ruling: TDD 以计划 Global Constraints 声明的验证形式执行（node --ch
 Ruling: sdd-workspace/task-start 脚本不可用（subagent-driven-development 包未安装），ledger 由执行者手动维护于本文件；成本：无脚本化任务边界校验，靠计划文本+todo 自律。
 
 Pre-flight: Task 2 消费 Task 3 产出的计划字段（plan_id/plan_day 写入 checkins）；Task 4/5/6 消费 Task 3 接口（list/detail/join/completeDay）；Task 7 消费全部。命名已锁定：plan_id / day_no / current_day / status(ongoing|completed|quit)。无冲突。
+Task 1: Ruling: plan_items 免人工回填 type_id——detail 读取时按 type_name 自动映射 training_types（原计划为导入后人工核对，易错）；成本：detail 多一次名称查询，数据量小可接受。
+Task 1: complete (commit $(git rev-parse --short HEAD), tests: node JSON 校验 → plans 2 条/items 28 条/type_name 匹配 0 失败 → PASS)
+Task 2: complete (commit $(git rev-parse --short HEAD), tests: node --check cloudfunctions/checkin/index.js → PASS)
+Task 3: complete (commit $(git rev-parse --short HEAD), tests: node --check → PASS + JSON 校验 OK)
+Task 5: Ruling: app.json 同批注册 workout 页（Task 6 才建文件），CLI 编译验证合并至 Task 6 完成后统一执行；成本：Task 5 独立状态不可编译，属预期。
+Task 5: complete (commit $(git rev-parse --short HEAD), tests: node --check plan-detail.js → PASS)
+Task 4/6: Ruling: app.json 同时注册 plan-detail/workout 两页，CLI 编译验证合并执行；plans 集合未建，官方列表空态为预期，完整形态待 Task 7 用户导入数据后复验。
+Task 4/6: complete (验证: wechatide simulator_open_page pages/plan/plan → success; simulator_screenshot → 空态渲染正确无报错 → PASS)
