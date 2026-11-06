@@ -167,6 +167,17 @@ async function handleCreate(openid, event) {
   const note = event.note || '';
   const photoFileId = event.photo_file_id || '';
 
+  // 计划跟练打卡：plan_id/plan_day 必须成对出现（蓝图 §6 checkins 预留字段，P1 启用）
+  let planId = null;
+  let planDay = null;
+  if (event.plan_id !== undefined || event.plan_day !== undefined) {
+    if (!event.plan_id || typeof event.plan_id !== 'string' || !Number.isInteger(event.plan_day) || event.plan_day < 1) {
+      return fail(1002, '参数有误：plan_id 与 plan_day 需成对传且合法');
+    }
+    planId = event.plan_id;
+    planDay = event.plan_day;
+  }
+
   if (!typeId || typeof typeId !== 'string') return fail(1002, '参数有误：type_id');
   if (!Number.isInteger(duration) || duration < 1 || duration > 600) {
     return fail(1002, '参数有误：时长需为 1-600 的整数分钟');
@@ -191,7 +202,9 @@ async function handleCreate(openid, event) {
       intensity: intensity,
       note: note,
       photo_file_id: photoFileId,
-      source: 'manual',
+      source: planId ? 'plan' : 'manual',
+      plan_id: planId || undefined,   // 计划跟练打卡专属，manual 时不写
+      plan_day: planDay || undefined,
       created_at: db.serverDate()
     }
   });
