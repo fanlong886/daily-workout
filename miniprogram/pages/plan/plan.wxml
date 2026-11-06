@@ -23,6 +23,9 @@
       </view>
       <view class="today-done" wx:else>🎉 今日任务已完成，明天见！</view>
     </view>
+    <view class="card my-plan" wx:elif="{{completed}}" bindtap="goDetail" data-id="{{completed.plan_id}}">
+      <view class="completed-card">🎉 已完成「{{completed.title}}」计划（{{completed.total_days}} 天），点击查看</view>
+    </view>
     <view class="card my-plan" wx:elif="{{my === null}}" bindtap="goDetail" data-id="{{official.length ? official[0]._id : ''}}">
       <view class="my-plan-empty">还没有进行中的计划，从下面选一个开始 👇</view>
     </view>

@@ -13,3 +13,4 @@ Task 5: Ruling: app.json 同批注册 workout 页（Task 6 才建文件），CLI
 Task 5: complete (commit $(git rev-parse --short HEAD), tests: node --check plan-detail.js → PASS)
 Task 4/6: Ruling: app.json 同时注册 plan-detail/workout 两页，CLI 编译验证合并执行；plans 集合未建，官方列表空态为预期，完整形态待 Task 7 用户导入数据后复验。
 Task 4/6: complete (验证: wechatide simulator_open_page pages/plan/plan → success; simulator_screenshot → 空态渲染正确无报错 → PASS)
+Task 7: complete (commit e269de7 + 本次补全, tests: node --check index.js → PASS; 端到端待用户部署集合与导入数据后验收)

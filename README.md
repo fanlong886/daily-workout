@@ -60,8 +60,8 @@ daily-workout/
 ### 4.5 创建计划相关集合并导入计划模板（P1）
 
 1. 控制台建 3 个集合（权限均为「仅创建者可读写」）：`plans`、`plan_items`、`user_plans`；
-2. `plans` 集合 → 导入 → `docs/plans.json`（2 条）→ Insert；
-3. `plan_items` 集合 → 导入 → `docs/plan_items.json`（28 条）→ Insert；
+2. `plans` 集合 → 导入 → `docs/plans.json`（2 条，`_id` 已预置）→ Insert；
+3. `plan_items` 集合 → 导入 → `docs/plan_items.json`（28 条，`plan_id` 已关联预置 `_id`）→ Insert；
 4. **无需人工回填 type_id**：`plan_items` 的 `type_name` 会在计划详情读取时自动映射到 `training_types` 的 `_id` 与图标。
 
 ### 5. 导入 training_types 预置数据（蓝图 §10.3）

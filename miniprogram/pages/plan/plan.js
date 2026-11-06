@@ -7,7 +7,8 @@ Page({
     official: [],       // 官方计划列表
     my: null,           // 进行中的计划 {plan_id, title, total_days, current_day, days:[...]}
     todayItem: null,    // 今天应完成的任务（第一个未完成的 day）
-    doneCount: 0        // 已完成天数
+    doneCount: 0,       // 已完成天数
+    completed: null     // 最近完成的计划 {plan_id, title, total_days}
   },
 
   onShow() {
@@ -26,7 +27,14 @@ Page({
           doneCount = my.days.filter((d) => d.done).length;
           todayItem = my.days.find((d) => !d.done) || null;
         }
-        this.setData({ loading: false, official: res.official, my: my, todayItem: todayItem, doneCount: doneCount });
+        this.setData({
+          loading: false,
+          official: res.official,
+          my: my,
+          todayItem: todayItem,
+          doneCount: doneCount,
+          completed: res.completed || null
+        });
       })
       .catch(() => this.setData({ loading: false }));
   },

@@ -188,6 +188,25 @@ async function handleCreate(openid, event) {
   const type = await getType(typeId);
   if (!type) return fail(2003, '训练类型无效');
 
+  // 计划打卡幂等：同 plan_id+plan_day 已有打卡时直接返回既有记录（completeDay 失败重试场景防重复）
+  if (planId) {
+    const dup = await checkinsCollection
+      .where({ user_id: openid, plan_id: planId, plan_day: planDay })
+      .limit(1)
+      .get();
+    if (dup.data.length > 0) {
+      const dateSet = await loadUserDateSet(openid);
+      const t = todayStr();
+      return ok({
+        checkin_id: dup.data[0]._id,
+        date: dup.data[0].date,
+        is_today_first: false,
+        streak_after: calcStreak(dateSet, t, dateSet.has(t)),
+        new_badges: []
+      });
+    }
+  }
+
   const date = todayStr();
   const before = await checkinsCollection.where({ user_id: openid, date: date }).count();
   const isTodayFirst = before.total === 0;

@@ -30,16 +30,15 @@
 
     <!-- 底部操作 -->
     <view class="bottom-action">
-      <block wx:if="{{!joined}}">
+      <block wx:if="{{!joined || myStatus === 'quit'}}">
         <button class="btn-primary {{joining ? 'btn-disabled' : ''}}" bindtap="onJoin" disabled="{{joining}}">
-          {{joining ? '加入中…' : '开始这个计划'}}
+          {{joining ? '加入中…' : (myStatus === 'quit' ? '重新开始这个计划' : '开始这个计划')}}
         </button>
       </block>
       <block wx:elif="{{myStatus === 'ongoing'}}">
         <button class="btn-primary" bindtap="onContinue">继续跟练</button>
       </block>
       <view wx:elif="{{myStatus === 'completed'}}" class="completed-label">🎉 你已完成这个计划</view>
-      <view wx:else class="completed-label">已放弃，可重新在计划页开始</view>
     </view>
   </block>
 </view>

@@ -69,6 +69,11 @@
   color: var(--color-text-secondary);
 }
 
+.completed-card {
+  font-size: var(--font-size-sm);
+  color: var(--color-success);
+}
+
 .block-title {
   font-size: var(--font-size-md);
   font-weight: 600;

@@ -113,6 +113,13 @@ async function handleList(openid) {
     .limit(1)
     .get();
 
+  // 已完成计划（最近一条）：供计划页完成态展示
+  const completedRes = await userPlansCollection
+    .where({ user_id: openid, status: 'completed' })
+    .orderBy('created_at', 'desc')
+    .limit(1)
+    .get();
+
   let my = null;
   const ongoing = ongoingRes.data[0];
   if (ongoing) {
@@ -134,7 +141,18 @@ async function handleList(openid) {
     };
   }
 
-  return ok({ official: official, my: my });
+  let completed = null;
+  const completedDoc = completedRes.data[0];
+  if (completedDoc) {
+    const planRes = await plansCollection.doc(completedDoc.plan_id).get().catch(() => null);
+    completed = {
+      plan_id: completedDoc.plan_id,
+      title: planRes && planRes.data ? planRes.data.title : '训练计划',
+      total_days: planRes && planRes.data ? planRes.data.total_days : 0
+    };
+  }
+
+  return ok({ official: official, my: my, completed: completed });
 }
 
 // detail：计划 + 全量天任务 + 加入状态
